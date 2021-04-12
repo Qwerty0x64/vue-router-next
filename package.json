@@ -98,7 +98,7 @@
     "ts-jest": "^26.5.4",
     "ts-loader": "^8.0.18",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.3",
+    "typescript": "^4.2.4",
     "vitepress": "^0.12.2",
     "vue": "^3.0.7",
     "vue-loader": "^16.1.2",

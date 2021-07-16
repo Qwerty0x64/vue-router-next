@@ -1,3 +1,4 @@
+import '../global.css'
 import { createRouter, createWebHistory, useRoute } from '../../src'
 import { RouteLocationNormalizedLoaded } from '../../src/types'
 import {
@@ -64,6 +65,7 @@ const Home = defineComponent({
     </div>
   </dialog>
   </div>`,
+
   setup() {
     const modal = ref<HTMLDialogElement | HTMLElement>()
     const route = useRoute()
@@ -133,7 +135,7 @@ const UserDetails = defineComponent({
   data: () => ({ users }),
 })
 
-const webHistory = createWebHistory('/' + __dirname)
+const webHistory = createWebHistory('/modal')
 const router = createRouter({
   history: webHistory,
   routes: [
@@ -195,13 +197,11 @@ const app = createApp({
   },
 
   template: `
-    <div id="app">
-      <router-view :route="routeWithModal"></router-view>
-    </div>
+    <router-view :route="routeWithModal"></router-view>
   `,
 })
 app.use(router)
 
 window.vm = app.mount('#app')
-// @ts-ignore
+// @ts-expect-error
 window.router = router

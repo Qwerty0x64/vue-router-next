@@ -67,6 +67,20 @@ createRouter({
 })
 ```
 
+### Removal of the `fallback` option
+
+The `fallback` option is no longer supported when creating the router:
+
+```diff
+-new VueRouter({
++createRouter({
+-  fallback: false,
+// other options...
+})
+```
+
+**Reason**: All browsers supported by Vue support the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API), allowing us to avoid hacks around modifying `location.hash` and directly use `history.pushState()`.
+
 ### Removed `*` (star or catch all) routes
 
 Catch all routes (`*`, `/*`) must now be defined using a parameter with a custom regex:
@@ -234,7 +248,7 @@ router.app = app
 
 You can also extend the TypeScript definition of the `Router` interface to add the `app` property.
 
-**Reason**: Vue 3 applications do not exist in Vue 2 and now we property support multiple applications using the same Router instance, so having an `app` property would have been misleading because it would have been the application instead of the root instance.
+**Reason**: Vue 3 applications do not exist in Vue 2 and now we properly support multiple applications using the same Router instance, so having an `app` property would have been misleading because it would have been the application instead of the root instance.
 
 ### Passing content to route components' `<slot>`
 
@@ -421,6 +435,6 @@ To make typings more consistent and expressive, some types have been renamed:
 
 Some of new features to keep an eye on in Vue Router 4 include:
 
-- [Dynamic Routing](../../api/#addroute-2)
+- [Dynamic Routing](../advanced/dynamic-routing.md)
 - [Composition API](../advanced/composition-api.md)
 <!-- - Custom History implementation -->

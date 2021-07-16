@@ -1,6 +1,9 @@
+import '../global.css'
 import { createRouter, createWebHistory } from '../../src'
 import { RouteComponent } from '../../src/types'
 import { createApp, defineComponent, nextTick, ref } from 'vue'
+
+// const delay = (t: number) => new Promise(r => setTimeout(r, t))
 
 const Home: RouteComponent = {
   template: `
@@ -72,7 +75,7 @@ const Default: RouteComponent = {
 const Foo: RouteComponent = { template: '<div class="foo">foo</div>' }
 const Bar: RouteComponent = { template: '<div class="bar">bar</div>' }
 
-const webHistory = createWebHistory('/' + __dirname)
+const webHistory = createWebHistory('/transitions')
 const router = createRouter({
   history: webHistory,
   routes: [
@@ -112,16 +115,15 @@ const app = createApp({
   },
 
   template: `
-    <div id="app">
-      <h1>Transitions</h1>
-      <pre>CI: ${__CI__}</pre>
-      <button id="toggle-transition" @click="toggleTransition">Toggle Transition</button>
-      <ul>
-        <li><router-link to="/">/</router-link></li>
-        <li><router-link to="/parent">/parent</router-link></li>
-        <li><router-link to="/parent/foo">/parent/foo</router-link></li>
-        <li><router-link to="/parent/bar">/parent/bar</router-link></li>
-        <li><router-link to="/not-found">Not existing</router-link></li>
+    <h1>Transitions</h1>
+    <pre>CI: ${__CI__}</pre>
+    <button id="toggle-transition" @click="toggleTransition">Toggle Transition</button>
+    <ul>
+      <li><router-link to="/">/</router-link></li>
+      <li><router-link to="/parent">/parent</router-link></li>
+      <li><router-link to="/parent/foo">/parent/foo</router-link></li>
+      <li><router-link to="/parent/bar">/parent/bar</router-link></li>
+      <li><router-link to="/not-found">Not existing</router-link></li>
 
         <li><router-link to="/nested">/nested</router-link></li>
         <li><router-link to="/nested/foo">/nested/foo</router-link></li>
@@ -132,7 +134,6 @@ const app = createApp({
           <component :is="Component" />
         </transition>
       </router-view>
-    </div>
   `,
 })
 app.use(router)

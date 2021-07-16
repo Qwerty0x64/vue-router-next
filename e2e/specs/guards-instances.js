@@ -49,7 +49,7 @@ module.exports = {
   'guards instances': function (browser) {
     const name = 'Foo'
     browser
-      .url('http://localhost:8080/guards-instances/')
+      .url('http://localhost:3000/guards-instances/')
       .waitForElementPresent('#app > *', 1000)
 
       .click('#test-normal')
@@ -68,7 +68,7 @@ module.exports = {
   /** @type {import('nightwatch').NightwatchTest} */
   'guards instances transition': function (browser) {
     browser
-      .url('http://localhost:8080/guards-instances/')
+      .url('http://localhost:3000/guards-instances/')
       .waitForElementPresent('#app > *', 1000)
 
       .click('#test-transition')
@@ -82,7 +82,7 @@ module.exports = {
   'guards instances keep alive': function (browser) {
     const name = 'Foo'
     browser
-      .url('http://localhost:8080/guards-instances/')
+      .url('http://localhost:3000/guards-instances/')
       .waitForElementPresent('#app > *', 1000)
 
       .click('#test-keepalive')
@@ -124,7 +124,7 @@ module.exports = {
   'guards instances keyed': function (browser) {
     const name = 'Foo'
     browser
-      .url('http://localhost:8080/guards-instances/')
+      .url('http://localhost:3000/guards-instances/')
       .waitForElementPresent('#app > *', 1000)
 
       .click('#test-keyed')
@@ -174,7 +174,7 @@ module.exports = {
   'guards instances keepalive keyed': function (browser) {
     const name = 'Foo'
     browser
-      .url('http://localhost:8080/guards-instances/')
+      .url('http://localhost:3000/guards-instances/')
       .waitForElementPresent('#app > *', 1000)
 
       .click('#test-keepalivekeyed')
@@ -247,7 +247,7 @@ module.exports = {
   /** @type {import('nightwatch').NightwatchTest} */
   'guards + instances + named views': function (browser) {
     browser
-      .url('http://localhost:8080/guards-instances/named-one')
+      .url('http://localhost:3000/guards-instances/named-one')
       .waitForElementPresent('#app > *', 1000)
 
     browser
@@ -259,8 +259,8 @@ module.exports = {
           `Aux: enter / - /named-one`,
           `One: leave /named-one - /`,
           `Aux: leave /named-one - /`,
-          `One: setup:leave /named-one - /`,
           `Aux: setup:leave /named-one - /`,
+          `One: setup:leave /named-one - /`,
         ].join('\n')
       )
 
@@ -273,8 +273,8 @@ module.exports = {
         [
           `One: leave /named-one - /named-two`,
           `Aux: leave /named-one - /named-two`,
-          `One: setup:leave /named-one - /named-two`,
           `Aux: setup:leave /named-one - /named-two`,
+          `One: setup:leave /named-one - /named-two`,
           `Two: enter /named-one - /named-two`,
           `Aux: enter /named-one - /named-two`,
         ].join('\n')

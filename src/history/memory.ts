@@ -52,6 +52,7 @@ export function createMemoryHistory(base: string = ''): RouterHistory {
   const routerHistory: RouterHistory = {
     // rewritten by Object.defineProperty
     location: START,
+    // TODO: should be kept in queue
     state: {},
     base,
     createHref: createHref.bind(null, base),
@@ -75,6 +76,8 @@ export function createMemoryHistory(base: string = ''): RouterHistory {
     },
     destroy() {
       listeners = []
+      queue = [START]
+      position = 0
     },
 
     go(delta, shouldTrigger = true) {
@@ -95,8 +98,21 @@ export function createMemoryHistory(base: string = ''): RouterHistory {
   }
 
   Object.defineProperty(routerHistory, 'location', {
+    enumerable: true,
     get: () => queue[position],
   })
+
+  if (__TEST__) {
+    // @ts-expect-error: only for tests
+    routerHistory.changeURL = function (url: string) {
+      const from = this.location
+      queue.splice(position++ + 1, queue.length, url)
+      triggerListeners(this.location, from, {
+        direction: NavigationDirection.unknown,
+        delta: 0,
+      })
+    }
+  }
 
   return routerHistory
 }

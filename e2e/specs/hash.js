@@ -1,26 +1,21 @@
 const bsStatus = require('../browserstack-send-status')
 
-const baseURL = 'http://localhost:8080/hash/#'
+const baseURL = 'http://localhost:3000/hash/#'
 
 module.exports = {
   ...bsStatus(),
 
   '@tags': ['hash', 'encoding'],
 
-  /** @type {import('nightwatch').NightwatchTest} */
   'navigating to links': function (browser) {
     browser
       .url(baseURL)
       .waitForElementPresent('#app > *', 1000)
-      .assert.attributeContains('li:nth-child(1) a', 'href', '/hash/#/')
-      .assert.attributeContains('li:nth-child(2) a', 'href', '/hash/#/foo')
-      .assert.attributeContains('li:nth-child(3) a', 'href', '/hash/#/bar')
-      .assert.attributeContains('li:nth-child(4) a', 'href', '/hash/#/n/%C3%A9')
-      .assert.attributeContains(
-        'li:nth-child(6) a',
-        'href',
-        '/hash/#/unicode/%C3%A9'
-      )
+      .assert.attributeContains('li:nth-child(1) a', 'href', '#/')
+      .assert.attributeContains('li:nth-child(2) a', 'href', '#/foo')
+      .assert.attributeContains('li:nth-child(3) a', 'href', '#/bar')
+      .assert.attributeContains('li:nth-child(4) a', 'href', '#/n/%C3%A9')
+      .assert.attributeContains('li:nth-child(6) a', 'href', '#/unicode/%C3%A9')
       .click('li:nth-child(3) a')
       .assert.urlEquals(baseURL + '/bar')
       .assert.containsText('.view', 'Bar')
@@ -51,12 +46,12 @@ module.exports = {
   /** @type {import('nightwatch').NightwatchTest} */
   'initial navigation with search': function (browser) {
     browser
-      .url('http://localhost:8080/hash/?code=auth#')
+      .url('http://localhost:3000/hash/?code=auth#')
       .waitForElementPresent('#app > *', 1000)
-      .assert.urlEquals('http://localhost:8080/hash/?code=auth#/')
+      .assert.urlEquals('http://localhost:3000/hash/?code=auth#/')
 
-      .url('http://localhost:8080/hash/?code=auth#/foo')
-      .assert.urlEquals('http://localhost:8080/hash/?code=auth#/foo')
+      .url('http://localhost:3000/hash/?code=auth#/foo')
+      .assert.urlEquals('http://localhost:3000/hash/?code=auth#/foo')
       // manually remove the search from the URL
       .waitForElementPresent('#app > *', 1000)
       .execute(function () {
@@ -69,9 +64,9 @@ module.exports = {
       .assert.urlEquals(baseURL + '/foo')
 
       // with slash between the pathname and search
-      .url('http://localhost:8080/hash/?code=auth#')
+      .url('http://localhost:3000/hash/?code=auth#')
       .waitForElementPresent('#app > *', 1000)
-      .assert.urlEquals('http://localhost:8080/hash/?code=auth#/')
+      .assert.urlEquals('http://localhost:3000/hash/?code=auth#/')
 
       .end()
   },

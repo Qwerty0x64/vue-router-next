@@ -1,3 +1,4 @@
+import '../global.css'
 import { createRouter, createWebHistory } from '../../src'
 import { RouteComponent } from '../../src/types'
 import { createApp, ref, watchEffect, App, inject } from 'vue'
@@ -12,9 +13,8 @@ const User: RouteComponent = {
 
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      // @ts-ignore
+      // @ts-expect-error
       console.log('enter from ', vm.id)
-      // @ts-ignore
     })
   },
 
@@ -41,7 +41,7 @@ const NamedViews: RouteComponent[] = looper.map(i => ({
 
   beforeRouteUpdate(to, from, next) {
     console.log('update of', i)
-    // @ts-ignore
+    // @ts-expect-error
     this.count++
     next()
   },
@@ -77,7 +77,7 @@ window.removeEventListener = function (name: string, handler: any) {
 }
 
 const router = createRouter({
-  history: createWebHistory('/' + __dirname),
+  history: createWebHistory('/multi-app'),
   routes: [
     { path: '/', component: Home },
     {

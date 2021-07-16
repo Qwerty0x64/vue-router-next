@@ -1,3 +1,4 @@
+import '../global.css'
 import { createRouter, createWebHistory, useRouter } from '../../src'
 import { RouteComponent } from '../../src/types'
 import { createApp, ref } from 'vue'
@@ -68,7 +69,7 @@ const WithGuards: RouteComponent = {
   },
 }
 
-const webHistory = createWebHistory('/' + __dirname)
+const webHistory = createWebHistory('/keep-alive')
 const router = createRouter({
   history: webHistory,
   routes: [
@@ -82,19 +83,17 @@ const router = createRouter({
 })
 const app = createApp({
   template: `
-    <div id="app">
-      <h1>KeepAlive</h1>
-      <ul>
-        <li><router-link to="/">/</router-link></li>
-        <li><router-link to="/foo">/foo</router-link></li>
-        <li><router-link to="/with-guards">/with-guards</router-link></li>
-      </ul>
-      <router-view v-slot="{ Component }">
-        <keep-alive>
-          <component class="view" :is="Component" />
-        </keep-alive>
-      </router-view>
-    </div>
+    <h1>KeepAlive</h1>
+    <ul>
+      <li><router-link to="/">/</router-link></li>
+      <li><router-link to="/foo">/foo</router-link></li>
+      <li><router-link to="/with-guards">/with-guards</router-link></li>
+    </ul>
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component class="view" :is="Component" />
+      </keep-alive>
+    </router-view>
   `,
 })
 app.use(router)
